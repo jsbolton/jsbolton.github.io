@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>codebyjacob</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2017-02-17T22:36:52-06:00</updated>
+ <id>http://localhost:4000</id>
+ <author>
+   <name>Jacob Bolton</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Git Bash Shortcuts</title>
+   <link href="http://localhost:4000/2017/02/17/git-bash-shortcuts/"/>
+   <updated>2017-02-17T00:00:00-06:00</updated>
+   <id>http://localhost:4000/2017/02/17/git-bash-shortcuts</id>
+   <content type="html">&lt;h3&gt;Background&lt;/h3&gt;
+
+&lt;p&gt;I’ve been working in a software shop that uses Mac machines for all our dev machines for about 3 months now. Prior to this, I had some experience with the Unix environment, but had never done anything with bash scripts to make my life easier. I had absolutely no idea what I was missing.&lt;/p&gt;
+
+&lt;h3&gt;Slow Start&lt;/h3&gt;
+
+&lt;p&gt;Less than two weeks into the job, I realized that typing out full branch names to checkout a branch was absolutely terrible and went through the process of setting up &lt;a href=&quot;http://code-worrier.com/blog/autocomplete-git/&quot;&gt;git-completion.bash&lt;/a&gt;, which I found extremely helpful, but that was the extent of my quality of life improvements for a while.&lt;/p&gt;
+
+&lt;p&gt;About a month later, I realized I could alias commands in  &lt;code&gt;~/.bash_profile&lt;/code&gt;. I’m more than a little ashamed of the fact that it took me so long to set up anything to help myself out, but I was finally getting it. I quickly set up a command to use psql and connect to our database.&lt;/p&gt;
+
+&lt;h3&gt;The Good Stuff&lt;/h3&gt;
+
+&lt;p&gt;Today, I finally went through the process of making my life a lot easier. I set up lots of basic shortcuts to make git commands quicker and speed up things I was doing all day anyway. Then I finally realized I could do a lot better for myself.  One of the functions I set up was a shorthand for doing checkouts.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; co&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    git checkout &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This could be used to checkout branches quickly with &lt;code&gt;co &amp;lt;branch_name&amp;gt;&lt;/code&gt;. I also set up the functions &lt;code&gt;nb&lt;/code&gt; and &lt;code&gt;db&lt;/code&gt; that used a similar structure to create and delete branches.&lt;/p&gt;
+
+&lt;p&gt;I then realized that my solution could do more. Git branch tab auto-completion is great, but what if I could do better? Our branches at work all have their JIRA ticket number in the name, followed by a description. I decided to make a function to search on a string provided and checkout the matching branch.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; cbb&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;branch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;git branch —list *&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;*&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+    git checkout &lt;span class=&quot;nv&quot;&gt;$branch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I used the shorthand cbb for &amp;#39;checkout bug branch&amp;#39;, but really the shorthand doesn’t matter. You can make it anything short that&amp;#39;s easy to remember.&lt;/p&gt;
+
+&lt;p&gt;My intended use for this was to use the JIRA ticket number with the checkout function, but it can be applied to any matching string. For example, I would have a branch name &lt;code&gt;web_9999_test_branch&lt;/code&gt; for example. To check it out with our new script, we just need to run &lt;code&gt;cbb 9999&lt;/code&gt; and our branch will be checked out.&lt;/p&gt;
+
+&lt;h3&gt;Next Steps&lt;/h3&gt;
+
+&lt;p&gt;There’s also room for some improvement here on the string matching for multiple matches and allowing the user to select one and potentially prompting the user for a new branch name if no result is found, but I’ll leave that for another post.&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      codebyjacob &middot; A Jekyll theme
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/site.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="layout-reverse theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          codebyjacob
+        </a>
+      </h1>
+      <p class="lead">A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a>
+      <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v2.1.0</span>
+    </nav>
+
+    <p>&copy; 2017. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/02/17/git-bash-shortcuts/">
+        Git Bash Shortcuts
+      </a>
+    </h1>
+
+    <span class="post-date">17 Feb 2017</span>
+
+    <h3>Background</h3>
+
+<p>I’ve been working in a software shop that uses Mac machines for all our dev machines for about 3 months now. Prior to this, I had some experience with the Unix environment, but had never done anything with bash scripts to make my life easier. I had absolutely no idea what I was missing.</p>
+
+<h3>Slow Start</h3>
+
+<p>Less than two weeks into the job, I realized that typing out full branch names to checkout a branch was absolutely terrible and went through the process of setting up <a href="http://code-worrier.com/blog/autocomplete-git/">git-completion.bash</a>, which I found extremely helpful, but that was the extent of my quality of life improvements for a while.</p>
+
+<p>About a month later, I realized I could alias commands in  <code>~/.bash_profile</code>. I’m more than a little ashamed of the fact that it took me so long to set up anything to help myself out, but I was finally getting it. I quickly set up a command to use psql and connect to our database.</p>
+
+<h3>The Good Stuff</h3>
+
+<p>Today, I finally went through the process of making my life a lot easier. I set up lots of basic shortcuts to make git commands quicker and speed up things I was doing all day anyway. Then I finally realized I could do a lot better for myself.  One of the functions I set up was a shorthand for doing checkouts.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> co<span class="o">()</span> <span class="o">{</span>
+    git checkout <span class="nv">$1</span><span class="p">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>This could be used to checkout branches quickly with <code>co &lt;branch_name&gt;</code>. I also set up the functions <code>nb</code> and <code>db</code> that used a similar structure to create and delete branches.</p>
+
+<p>I then realized that my solution could do more. Git branch tab auto-completion is great, but what if I could do better? Our branches at work all have their JIRA ticket number in the name, followed by a description. I decided to make a function to search on a string provided and checkout the matching branch.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> cbb<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">branch</span><span class="o">=</span><span class="sb">`</span>git branch —list *<span class="nv">$1</span>*<span class="p">;</span><span class="sb">`</span>
+    git checkout <span class="nv">$branch</span><span class="p">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>I used the shorthand cbb for &#39;checkout bug branch&#39;, but really the shorthand doesn’t matter. You can make it anything short that&#39;s easy to remember.</p>
+
+<p>My intended use for this was to use the JIRA ticket number with the checkout function, but it can be applied to any matching string. For example, I would have a branch name <code>web_9999_test_branch</code> for example. To check it out with our new script, we just need to run <code>cbb 9999</code> and our branch will be checked out.</p>
+
+<h3>Next Steps</h3>
+
+<p>There’s also room for some improvement here on the string matching for multiple matches and allowing the user to select one and potentially prompting the user for a new branch name if no result is found, but I’ll leave that for another post.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+    </div>
+
+  </body>
+</html>
